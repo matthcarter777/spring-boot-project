@@ -2,6 +2,7 @@ package com.mateus.course.entities;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mateus.course.entities.pk.OrderItemPK;
 
 import jakarta.persistence.EmbeddedId;
@@ -15,7 +16,7 @@ public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 	
 	public Integer quantity;
 	public Double price;
@@ -30,6 +31,7 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
