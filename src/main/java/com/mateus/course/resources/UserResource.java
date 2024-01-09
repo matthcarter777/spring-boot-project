@@ -16,6 +16,7 @@ import com.mateus.course.entities.User;
 import com.mateus.course.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -54,5 +55,12 @@ public class UserResource {
 		service.delete(id);
 
 		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
+		user = service.update(id, user);
+
+		return ResponseEntity.ok().body(user);
 	}
 }
